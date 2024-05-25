@@ -2,6 +2,9 @@ package org.abdelhafeez.dr_momen.entity;
 
 import java.util.List;
 
+import org.abdelhafeez.dr_momen.enums.AgeUnit;
+import org.abdelhafeez.dr_momen.enums.Gender;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,10 +37,10 @@ public class Patient {
     private Integer age;
 
     @Enumerated(EnumType.STRING)
-    private String ageUnit;
+    private AgeUnit ageUnit;
 
     @Enumerated(EnumType.STRING)
-    private String gender;
+    private Gender gender;
 
     private String address;
 
