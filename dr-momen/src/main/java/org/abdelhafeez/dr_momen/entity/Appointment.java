@@ -2,6 +2,8 @@ package org.abdelhafeez.dr_momen.entity;
 
 import java.util.Date;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,8 +15,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
 public class Appointment {
 
     @Id
@@ -22,6 +32,7 @@ public class Appointment {
     private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private Date createdAt;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
