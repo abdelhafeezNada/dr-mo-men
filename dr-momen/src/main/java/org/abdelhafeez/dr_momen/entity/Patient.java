@@ -48,7 +48,7 @@ public class Patient {
 
     private String address;
 
-    @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Appointment> appointments;
 
     @Temporal(TemporalType.TIMESTAMP)
