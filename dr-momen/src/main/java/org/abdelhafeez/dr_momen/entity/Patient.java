@@ -46,6 +46,8 @@ public class Patient {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    private String phone;
+
     private String address;
 
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -54,4 +56,6 @@ public class Patient {
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private Date createdAt;
+
+    private String moreInfo;
 }
