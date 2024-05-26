@@ -23,16 +23,16 @@
         <div>
             <label for="ageUnit">Age Unit:</label>
             <select id="ageUnit" th:field="*{ageUnit}">
-                <option th:value="DAY" th:text="#{ageUnit.DAY}">Day</option>
-                <option th:value="MONTH" th:text="#{ageUnit.MONTH}">Month</option>
-                <option th:value="YEAR" th:text="#{ageUnit.YEAR}">Year</option>
+                <option th:value="DAY" th:text="'Day'">Day</option>
+                <option th:value="MONTH" th:text="'Month'">Month</option>
+                <option th:value="YEAR" th:text="'Year'">Year</option>
             </select>
         </div>
         <div>
             <label for="gender">Gender:</label>
             <select id="gender" th:field="*{gender}">
-                <option th:value="MALE" th:text="#{gender.MALE}">Male</option>
-                <option th:value="FEMALE" th:text="#{gender.FEMALE}">Female</option>
+                <option th:value="MALE" th:text="'Male'">Male</option>
+                <option th:value="FEMALE" th:text="'Female'">Female</option>
             </select>
         </div>
         <div>
