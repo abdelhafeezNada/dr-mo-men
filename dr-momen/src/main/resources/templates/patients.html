@@ -38,6 +38,8 @@
                 <th>Age Unit</th>
                 <th>Gender</th>
                 <th>Address</th>
+                <th>Phone</th>
+                <th>More Info</th>
                 <th>Created At</th>
             </tr>
         </thead>
@@ -49,6 +51,8 @@
                 <td th:text="${patient.ageUnit}">Age Unit</td>
                 <td th:text="${patient.gender}">Gender</td>
                 <td th:text="${patient.address}">Address</td>
+                <td th:text="${patient.phone}">Phone</td>
+                <td th:text="${patient.moreInfo}">More Info</td>
                 <td th:text="${#dates.format(patient.createdAt, 'yyyy-MM-dd HH:mm:ss')}">Created At</td>
             </tr>
         </tbody>
