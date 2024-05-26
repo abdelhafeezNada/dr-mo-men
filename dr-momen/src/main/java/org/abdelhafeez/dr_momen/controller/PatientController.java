@@ -1,5 +1,7 @@
 package org.abdelhafeez.dr_momen.controller;
 
+import java.util.regex.Pattern;
+
 import org.abdelhafeez.dr_momen.entity.Patient;
 import org.abdelhafeez.dr_momen.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +32,10 @@ public class PatientController {
         ModelAndView modelAndView = new ModelAndView("new_patient");
         modelAndView.addObject("patient", new Patient());
         return modelAndView;
+    }
+
+    private boolean isValidPhone(String phone) {
+        String phonePattern = "^01\\d{9}$";
+        return Pattern.matches(phonePattern, phone);
     }
 }
