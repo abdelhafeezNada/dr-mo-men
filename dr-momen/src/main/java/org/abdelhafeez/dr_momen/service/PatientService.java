@@ -22,4 +22,8 @@ public class PatientService {
         patientRepo.save(patient);
     }
 
+    public long count() {
+        return patientRepo.count();
+    }
+
 }
