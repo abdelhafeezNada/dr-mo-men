@@ -24,4 +24,11 @@ public class PatientController {
         modelAndView.addObject("totalPages", patientPage.getTotalPages());
         return modelAndView;
     }
+
+    @GetMapping("/patients/new")
+    public ModelAndView showCreatePatientForm() {
+        ModelAndView modelAndView = new ModelAndView("new_patient");
+        modelAndView.addObject("patient", new Patient());
+        return modelAndView;
+    }
 }
