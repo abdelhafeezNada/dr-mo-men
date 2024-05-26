@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Create or Update Patient</title>
+</head>
+
+<body>
+    <h1 th:text="${patient.id == null} ? 'Create New Patient' : 'Update Patient'"></h1>
+    <form action="#" th:action="@{/patients}" th:object="${patient}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" th:field="*{name}" required />
+        </div>
+
+        <div>
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" th:field="*{phone}" required />
+        </div>
+
+        <div>
+            <label for="age">Age</label>
+            <input type="number" id="age" th:field="*{age}" required />
+        </div>
+
+        <div>
+            <label for="ageUnit">Age Unit</label>
+            <select id="ageUnit" th:field="*{ageUnit}">
+                <option th:each="unit : ${T(org.abdelhafeez.dr_momen.enums.AgeUnit).values()}" th:value="${unit}"
+                    th:text="${unit}">Age Unit</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="gender">Gender</label>
+            <select id="gender" th:field="*{gender}">
+                <option th:each="gender : ${T(org.abdelhafeez.dr_momen.enums.Gender).values()}" th:value="${gender}"
+                    th:text="${gender}">Gender</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="moreInfo">More Info</label>
+            <textarea id="moreInfo" th:field="*{moreInfo}" rows="3"></textarea>
+        </div>
+
+        <div>
+            <label for="address">Address</label>
+            <textarea id="address" th:field="*{address}" rows="3"></textarea>
+        </div>
+
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</body>
+
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Create New Patient</title>
+</head>
+
+<body>
+    <h1>Create New Patient</h1>
+    <form action="#" th:action="@{/patients}" th:object="${patient}" method="post">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" th:field="*{name}" required />
+        </div>
+        <div>
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" th:field="*{phone}" required />
+        </div>
+        <div>
+            <label for="age">Age:</label>
+            <input type="number" id="age" th:field="*{age}" required />
+        </div>
+        <div>
+            <label for="ageUnit">Age Unit:</label>
+            <select id="ageUnit" th:field="*{ageUnit}">
+                <option th:value="DAY" th:text="'Day'">Day</option>
+                <option th:value="MONTH" th:text="'Month'">Month</option>
+                <option th:value="YEAR" th:text="'Year'">Year</option>
+            </select>
+        </div>
+        <div>
+            <label for="gender">Gender:</label>
+            <select id="gender" th:field="*{gender}">
+                <option th:value="MALE" th:text="'Male'">Male</option>
+                <option th:value="FEMALE" th:text="'Female'">Female</option>
+            </select>
+        </div>
+        <div>
+            <label for="moreInfo">More Info:</label>
+            <textarea id="moreInfo" th:field="*{moreInfo}" rows="5"></textarea>
+        </div>
+        <div>
+            <label for="address">Address:</label>
+            <textarea id="address" th:field="*{address}" rows="3"></textarea>
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</body>
+
+</html> -->
