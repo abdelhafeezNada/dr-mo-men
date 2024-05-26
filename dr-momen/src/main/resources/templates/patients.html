@@ -29,6 +29,12 @@
 
 <body>
     <h1>Patients List</h1>
+
+    <form action="#" th:action="@{/patients/search}" method="get">
+        <input type="text" name="name" placeholder="Search by name" />
+        <button type="submit">Search</button>
+    </form>
+
     <table id="patients-list">
         <thead>
             <tr>
@@ -41,6 +47,7 @@
                 <th>Phone</th>
                 <th>More Info</th>
                 <th>Created At</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -54,22 +61,29 @@
                 <td th:text="${patient.phone}">Phone</td>
                 <td th:text="${patient.moreInfo}">More Info</td>
                 <td th:text="${#dates.format(patient.createdAt, 'yyyy-MM-dd HH:mm:ss')}">Created At</td>
+                <td>
+                    <a th:href="@{/patients/{id}/edit(id=${patient.id})}">Update</a>
+                </td>
             </tr>
         </tbody>
     </table>
 
     <div>
-        <ul class="pagination">
-            <li th:if="${currentPage > 0}">
-                <a th:href="@{/patients(page=${currentPage - 1})}">&laquo; Previous</a>
-            </li>
-            <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${i == currentPage} ? 'active'">
-                <a th:href="@{/patients(page=${i})}" th:text="${i + 1}">1</a>
-            </li>
-            <li th:if="${currentPage < totalPages - 1}">
-                <a th:href="@{/patients(page=${currentPage + 1})}">Next &raquo;</a>
-            </li>
-        </ul>
+        <span th:if="${currentPage > 0}">
+            <a th:if="${searchName != null}"
+                th:href="@{/patients/search(name=${searchName}, page=${currentPage - 1})}">Previous</a>
+            <a th:if="${searchName == null}" th:href="@{/patients(page=${currentPage - 1})}">Previous</a>
+        </span>
+        <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+            <a th:if="${searchName != null}" th:href="@{/patients/search(name=${searchName}, page=${i})}"
+                th:text="${i + 1}"></a>
+            <a th:if="${searchName == null}" th:href="@{/patients(page=${i})}" th:text="${i + 1}"></a>
+        </span>
+        <span th:if="${currentPage < totalPages - 1}">
+            <a th:if="${searchName != null}"
+                th:href="@{/patients/search(name=${searchName}, page=${currentPage + 1})}">Next</a>
+            <a th:if="${searchName == null}" th:href="@{/patients(page=${currentPage + 1})}">Next</a>
+        </span>
     </div>
 </body>
 
