@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Patients List</title>
+    <style>
+        .pagination {
+            display: flex;
+            list-style-type: none;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination a {
+            text-decoration: none;
+            padding: 5px 10px;
+            color: #007bff;
+        }
+
+        .pagination .active a {
+            font-weight: bold;
+            color: #fff;
+            background-color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Patients List</h1>
+    <table id="patients-list">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Age Unit</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="patient : ${patients}">
+                <td th:text="${patient.id}">ID</td>
+                <td th:text="${patient.name}">Name</td>
+                <td th:text="${patient.age}">Age</td>
+                <td th:text="${patient.ageUnit}">Age Unit</td>
+                <td th:text="${patient.gender}">Gender</td>
+                <td th:text="${patient.address}">Address</td>
+                <td th:text="${#dates.format(patient.createdAt, 'yyyy-MM-dd HH:mm:ss')}">Created At</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <ul class="pagination">
+            <li th:if="${currentPage > 0}">
+                <a th:href="@{/patients(page=${currentPage - 1})}">&laquo; Previous</a>
+            </li>
+            <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${i == currentPage} ? 'active'">
+                <a th:href="@{/patients(page=${i})}" th:text="${i + 1}">1</a>
+            </li>
+            <li th:if="${currentPage < totalPages - 1}">
+                <a th:href="@{/patients(page=${currentPage + 1})}">Next &raquo;</a>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
