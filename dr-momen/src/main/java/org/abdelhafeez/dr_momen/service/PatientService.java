@@ -18,4 +18,8 @@ public class PatientService {
         return patientRepo.findAll(PageRequest.of(pageNum, 10));
     }
 
+    public void save(Patient patient) {
+        patientRepo.save(patient);
+    }
+
 }
