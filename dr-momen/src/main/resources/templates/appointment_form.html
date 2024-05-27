@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Create or Update Appointment</title>
+</head>
+
+<body>
+    <h1 th:text="${appointment.id} == null ? 'Create Appointment' : 'Update Appointment'"></h1>
+
+    <form th:action="@{/appointments/save}" th:object="${appointment}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div>
+            <label for="diagnosis">Diagnosis:</label>
+            <textarea id="diagnosis" th:field="*{diagnosis}"></textarea>
+        </div>
+
+        <div>
+            <label for="prescription">Prescription:</label>
+            <textarea id="prescription" th:field="*{prescription}"></textarea>
+        </div>
+
+        <div>
+            <label for="patientId">Patient ID:</label>
+            <input type="number" id="patientId" th:field="*{patient.id}"
+                th:value="${appointment.patient != null ? appointment.patient.id : ''}" readonly="readonly" />
+        </div>
+
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</body>
+
+</html>
