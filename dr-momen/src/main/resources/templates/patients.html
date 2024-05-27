@@ -63,7 +63,8 @@
                 <td th:text="${#dates.format(patient.createdAt, 'yyyy-MM-dd HH:mm:ss')}">Created At</td>
                 <td>
                     <a th:href="@{/patients/{id}/edit(id=${patient.id})}">Update</a>,
-                    <a th:href="@{/appointments/by-patient(id=${patient.id})}">List Appointments</a>
+                    <a th:href="@{/appointments/by-patient(id=${patient.id})}">List Appointments</a>,
+                    <a th:href="@{appointments/patient/{patientId}/form(patientId=${patient.id})}">New Appointment</a>
                 </td>
             </tr>
         </tbody>
