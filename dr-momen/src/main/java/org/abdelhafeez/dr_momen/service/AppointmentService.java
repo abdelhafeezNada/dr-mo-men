@@ -21,4 +21,12 @@ public class AppointmentService {
     public Page<Appointment> findAll(int page) {
         return appointmentRepo.findAll(PageRequest.of(page, 10));
     }
+
+    public Appointment findById(Long id) {
+        return appointmentRepo.findById(id).orElse(null);
+    }
+
+    public void save(Appointment appointment) {
+        appointmentRepo.save(appointment);
+    }
 }
