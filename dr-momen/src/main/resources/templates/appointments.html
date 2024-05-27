@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Patients List</title>
+    <style>
+        .pagination {
+            display: flex;
+            list-style-type: none;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination a {
+            text-decoration: none;
+            padding: 5px 10px;
+            color: #007bff;
+        }
+
+        .pagination .active a {
+            font-weight: bold;
+            color: #fff;
+            background-color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Appointments List</h1>
+
+    <form action="#" th:action="@{/patients/search}" method="get">
+        <input type="text" name="name" placeholder="Search by name" />
+        <button type="submit">Search</button>
+    </form>
+
+    <table id="appointments-list">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Patient Name</th>
+                <th>diagnosis</th>
+                <th>prescription</th>
+                <th>Created At</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="ap : ${appointments}">
+                <td th:text="${ap.id}">ID</td>
+                <td th:text="${ap.patient.name}">ID</td>
+                <td th:text="${ap.diagnosis}">diagnosis</td>
+                <td th:text="${ap.prescription}">prescription</td>
+                <td th:text="${#dates.format(ap.createdAt, 'yyyy-MM-dd HH:mm:ss')}">Created At</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <span th:if="${currentPage > 0}">
+            <a th:if="${patientId != null}"
+                th:href="@{/appointments/by-patient(id=${patientId}, page=${currentPage - 1})}">Previous</a>
+            <a th:if="${patientId == null}" th:href="@{/appointments(page=${currentPage - 1})}">Previous</a>
+        </span>
+        <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+            <a th:if="${patientId != null}" th:href="@{/appointments/by-patient(id=${patientId}, page=${i})}"
+                th:text="${i + 1}"></a>
+            <a th:if="${patientId == null}" th:href="@{/appointments(page=${i})}" th:text="${i + 1}"></a>
+        </span>
+        <span th:if="${currentPage < totalPages - 1}">
+            <a th:if="${patientId != null}"
+                th:href="@{/appointments/by-patient(id=${patientId}, page=${currentPage + 1})}">Next</a>
+            <a th:if="${patientId == null}" th:href="@{/appointments(page=${currentPage + 1})}">Next</a>
+        </span>
+    </div>
+</body>
+
+</html>
