@@ -53,6 +53,11 @@
                 <td th:text="${ap.diagnosis}">diagnosis</td>
                 <td th:text="${ap.prescription}">prescription</td>
                 <td th:text="${#dates.format(ap.createdAt, 'yyyy-MM-dd HH:mm:ss')}">Created At</td>
+                <td>
+                    <a
+                        th:href="@{/appointments/patient/{patientId}/form(id=${ap.id}, patientId=${ap.patient.id})}">Update</a>
+
+                </td>
             </tr>
         </tbody>
     </table>
