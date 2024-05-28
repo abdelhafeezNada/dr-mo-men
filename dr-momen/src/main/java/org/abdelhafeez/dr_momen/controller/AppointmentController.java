@@ -1,5 +1,7 @@
 package org.abdelhafeez.dr_momen.controller;
 
+import java.util.Date;
+
 import org.abdelhafeez.dr_momen.entity.Appointment;
 import org.abdelhafeez.dr_momen.entity.Patient;
 import org.abdelhafeez.dr_momen.service.AppointmentService;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 
 @Controller
@@ -26,22 +29,26 @@ public class AppointmentController {
 
     @GetMapping("appointments/patient/{patientId}/form")
     public String showAppointmentForm(@PathVariable Long patientId, @RequestParam(required = false) Long id,
-            Model model) {
+            Model model, HttpSession session) {
+        Appointment appointment;
         if (id != null) {
-            Appointment appointment = appointmentService.findById(id);
+            appointment = appointmentService.findById(id);
             model.addAttribute("appointment", appointment);
         } else {
-            Appointment appointment = new Appointment();
+            appointment = new Appointment();
             appointment.setPatient(Patient.builder().id(patientId).build());
+            appointment.setCreatedAt(new Date());
             model.addAttribute("appointment", appointment);
         }
+        session.setAttribute("createdAt", appointment.getCreatedAt());
         return "appointment_form";
     }
 
     @PostMapping("appointments/save")
-    public String saveAppointment(@ModelAttribute Appointment appointment) {
+    public String saveAppointment(@ModelAttribute Appointment appointment, HttpSession session) {
         Patient patient = patientService.findById(appointment.getPatient().getId());
         appointment.setPatient(patient);
+        appointment.setCreatedAt((Date) session.getAttribute("createdAt"));
         appointmentService.save(appointment);
         return "redirect:/appointments";
     }
