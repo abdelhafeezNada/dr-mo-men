@@ -26,6 +26,13 @@
                 th:value="${appointment.patient != null ? appointment.patient.id : ''}" readonly="readonly" />
         </div>
 
+        <!-- <div>
+            <label for="createdAt">Created At:</label>
+            <input type="text" id="createdAt" th:field="*{createdAt}" th:value="${appointment.createdAt}"
+                readonly="readonly" />
+        </div> -->
+
+
         <div>
             <button type="submit">Submit</button>
         </div>
